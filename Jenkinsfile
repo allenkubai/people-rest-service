@@ -77,9 +77,9 @@ spec:
 			}			
 		}
 		stage('Deploy To Kubernetes'){
-			environment { 
-        KUBECONFIG = credentials('oci-kubernetes') 
-      }
+			// environment { 
+      //   KUBECONFIG = credentials('oci-kubernetes') 
+      // }
      
 			steps {		
 				container('kubectl') {		
