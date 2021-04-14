@@ -1,20 +1,29 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.3'
+    id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'idea'
     id 'eclipse'
 }
 
-bootJar {
-    baseName = 'people-service'
+bootJar{
     version = '0.1.0'
 }
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
 
+bootBuildImage{
+    dependsOn unpack
+}
 repositories {
     mavenCentral()
 }
 
+
+version = '0.1.0'
 sourceCompatibility = 1.8
 
 dependencies {
